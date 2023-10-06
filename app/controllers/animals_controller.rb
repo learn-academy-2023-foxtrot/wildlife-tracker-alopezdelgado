@@ -11,8 +11,18 @@ class AnimalsController < ApplicationController
             render json: animals.errors
         end 
      end 
+     def update
+        animals = Animal.find(params[:id])
+        animals.update(animals_params)
+        if animals.valid?
+          render json: animals
+        else
+          render json: animals.errors
+        end
+      end
      private 
      def animals_params 
         params.require(:animal).permit(:name, :scientific_binomial)
      end
+
 end
